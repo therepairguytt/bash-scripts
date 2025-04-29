@@ -12,7 +12,7 @@ PROXY_TARGET="${PROTOCOL}://${LOCAL_IP}:${LOCAL_PORT}"
 
 # === Create log directory and per-run log file ===
 LOG_DIR="/var/log/nginx_proxy_setup"
-TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+TIMESTAMP=$(date +"%d/%mmm/%YY_%H:%M:%S")
 LOG_FILE="${LOG_DIR}/${FILENAME}_${TIMESTAMP}.log"
 
 sudo mkdir -p "$LOG_DIR"
@@ -23,7 +23,7 @@ sudo chmod 644 "$LOG_FILE"
 log() {
     local LEVEL=$1
     local MESSAGE=$2
-    TS=$(date +"%Y-%m-%d %H:%M:%S")
+    TS=$(date +"%d/%mmm/%YY %H:%M:%S")
     echo -e "[$LEVEL] $TS: $MESSAGE" | tee -a "$LOG_FILE"
 }
 
