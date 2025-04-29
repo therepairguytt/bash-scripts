@@ -11,9 +11,10 @@ read -p "Enter the local port (e.g., 8096): " LOCAL_PORT
 PROXY_TARGET="${PROTOCOL}://${LOCAL_IP}:${LOCAL_PORT}"
 
 # === Create log directory and per-run log file ===
+LOG_NAME="${FILENAME}_proxy"
 LOG_DIR="/var/log/nginx_proxy_setup"
 TIMESTAMP=$(date +"%d/%m/%Y_%H:%M:%S")
-LOG_FILE="${LOG_DIR}/${FILENAME}_proxy_${TIMESTAMP}.log"
+LOG_FILE="${LOG_DIR}/${LOG_NAME}_${TIMESTAMP}.log"
 
 sudo mkdir -p "$LOG_DIR"
 sudo touch "$LOG_FILE"
