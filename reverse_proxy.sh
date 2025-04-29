@@ -39,7 +39,7 @@ log "INFO" "The domains [${SERVER_DOMAINS}] will proxy to $PROXY_TARGET"
 sudo tee "$CONFIG_FILE" > /dev/null <<EOF
 server {
     listen 80;
-    listen [::]:80
+    listen [::]:80;
     
     server_name ${SERVER_DOMAINS};
 
