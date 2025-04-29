@@ -72,7 +72,7 @@ if sudo nginx -t; then
     log "SUCCESS" "NGINX reverse proxy configuration is valid and reloaded."
 else
     log "ERROR" "NGINX reverse proxy config test failed. Fix the config before continuing."
-	log "ERROR" "NGINX reverse proxy config file can be found at $CONFIG_FILE"
+	log "ERROR" "NGINX reverse proxy config file can be found at $CONFIG_FILE and the log can be found at $LOG_FILE"
     exit 1
 fi
 
