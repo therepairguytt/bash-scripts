@@ -13,7 +13,7 @@ PROXY_TARGET="${PROTOCOL}://${LOCAL_IP}:${LOCAL_PORT}"
 # === Create log directory and per-run log file ===
 LOG_NAME="${FILENAME}_proxy"
 LOG_DIR="/var/log/nginx_proxy_setup"
-TIMESTAMP=$(date +"%d-%m-%Y_%H:%M:%S")
+TIMESTAMP=$(date +"%d-%m-%Y_%H-%M-%S")
 LOG_FILE="${LOG_DIR}/${LOG_NAME}_${TIMESTAMP}.log"
 
 sudo mkdir -p "$LOG_DIR"
@@ -24,7 +24,7 @@ sudo chmod 644 "$LOG_FILE"
 log() {
     local LEVEL=$1
     local MESSAGE=$2
-    TS=$(date +"%d-%m-%Y %H:%M:%S")
+    TS=$(date +"%d-%m-%Y %H-%M-%S")
     echo -e "[$LEVEL] $TS: $MESSAGE" | tee -a "$LOG_FILE"
 }
 
@@ -50,7 +50,11 @@ server {
         proxy_set_header X-Real-IP \$remote_addr;
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection "upgrade";
+		proxy_http_version 1.1;
         client_max_body_size 0;
+		
     }
 }
 EOF
