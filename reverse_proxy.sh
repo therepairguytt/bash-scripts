@@ -45,18 +45,14 @@ server {
     server_name ${SERVER_DOMAINS};
 
     location / {
-        proxy_pass http://172.100.30.14:11000;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $http_connection;
-#        proxy_set_header X-Forwarded-Host $host;
-#        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-#        proxy_set_header X-Forwarded-Proto $scheme;
-#        proxy_set_header X-Real-IP $remote_addr;
+        proxy_pass ${PROXY_TARGET};
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection \$http_connection;
+#        proxy_set_header X-Forwarded-Host \$host;
+#        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+#        proxy_set_header X-Forwarded-Proto \$scheme;
+#        proxy_set_header X-Real-IP \$remote_addr;
         client_max_body_size 0;
-#        set_real_ip_from 172.16.0.0/12;
-#        set_real_ip_from 10.0.0.0/8;
-#        set_real_ip_from 192.168.0.0/16;
-#        set_real_ip_from 172.100.31.0/24;
         real_ip_header X-Forwarded-For;
     }
 }
